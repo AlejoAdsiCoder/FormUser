@@ -6,74 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
-    <script type="text/javascript">
-        function val()
-        {
-         var error="";
-         var cedula = document.getElementById( "cedula" );
-         var nombre = document.getElementById( "nombre" );
-         let pass = document.getElementById('password').value;
-        let email = document.getElementById('email').value;
-        let type = document.getElementById('type').value;
-        let comment = document.getElementById('comentario').value;
-
-         if( cedula.value == "" )
-         {
-          error = " No escribiste la cedula. ";
-          document.getElementById( "error_para" ).innerHTML = error;
-          return false;
-         }
-         
-         var nombre = document.getElementById( "nombre" );
-         if( nombre.value == "" )
-         {
-          error = " No escribiste el nombre. ";
-          document.getElementById( "error_para" ).innerHTML = error;
-          return false;
-         }
-
-         if( pass.value == "" )
-         {
-          error = " No escribiste el password. ";
-          document.getElementById( "error_para" ).innerHTML = error;
-          return false;
-         }
-
-         if( email.value == "" )
-         {
-          error = " No escibiste el email. ";
-          document.getElementById( "error_para" ).innerHTML = error;
-          return false;
-         }
-
-         if( type.value == "" )
-         {
-          error = " No seleccionaste el tipo ";
-          document.getElementById( "error_para" ).innerHTML = error;
-          return false;
-         }
-
-         if( comment.value == "" )
-         {
-          error = " No escribiste el comentario ";
-          document.getElementById( "error_para" ).innerHTML = error;
-          return false;
-         }
-
-         else {
-            return true;
-         }
-        
-        }
-        
-        </script>
+    
 
 </head>
 <body>
-    <form method="post" action="user.php" onsubmit="return val()">
+    <form method="post" id="form" action="user.php">
         <div class="form-group">
           <label for="cedula">Numero cedula</label>
-          <input type="text" class="form-control" id="cedula" aria-describedby="emailHelp" placeholder="Ingresa cedula">
+          <input type="text" class="form-control" id="cedula" name="cedula" aria-describedby="emailHelp">
           
         </div>
 
@@ -86,7 +26,7 @@
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
             
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+              <input type="password" class="form-control" id="password" name="pass" placeholder="Password">
             
         </div>  
         <div class="form-group">
@@ -95,7 +35,8 @@
           </div>
         <div class="form-group">
             <label for="tipo">Tipo usuario</label>
-            <select class="form-control" id="tipo">
+            <select class="form-control" id="type" name="type">
+                <option selected value="">Contador</option>
               <option value="1">Contador</option>
               <option value="2">Medico</option>
               <option value="3">Ingeniero</option>
@@ -105,11 +46,73 @@
             <label for="comment">commentario</label>
             <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <input type="button" name="submit_form" id="btn" class="btn btn-primary" value="Submit" />
       </form>
 
       <p id="error_para" ></p>
+      <script type="text/javascript">
+        window.onload = function()
+        {
+            let error="";
+            let cedula = document.getElementById( "cedula" );
+            let nombre = document.getElementById( "nombre" );
+            let pass = document.getElementById('password');
+            let email = document.getElementById('email');
+            let type = document.getElementById('type');
+            let comment = document.getElementById('comment');
+            let button = document.getElementById('btn');
+            let form = document.getElementById('form');
 
+            button.addEventListener("click", function() {
+                if( cedula.value == "" )
+                {
+                    error = " No escribiste la cedula. POR FAVOR LLENE TODOS LOS CAMPOS ";
+                    document.getElementById( "error_para" ).innerHTML = error;
+                    return false;
+                }
+                if( nombre.value == "" )
+                {
+                    error = " No escribiste el nombre. POR FAVOR LLENE TODOS LOS CAMPOS ";
+                    document.getElementById( "error_para" ).innerHTML = error;
+                    return false;
+                }
+
+                if( pass.value == "" )
+                {
+                    error = " No escribiste el password. POR FAVOR LLENE TODOS LOS CAMPOS ";
+                    document.getElementById( "error_para" ).innerHTML = error;
+                    return false;
+                }
+
+                if( email.value == "" )
+                {
+                    error = " No escibiste el email. POR FAVOR LLENE TODOS LOS CAMPOS ";
+                    document.getElementById( "error_para" ).innerHTML = error;
+                    return false;
+                }
+
+                if( type.value == "" )
+                {
+                    error = " No seleccionaste el tipo . POR FAVOR LLENE TODOS LOS CAMPOS";
+                    document.getElementById( "error_para" ).innerHTML = error;
+                    return false;
+                }
+
+                if( comment.value == "" )
+                {
+                    error = " No escribiste el comentario . POR FAVOR LLENE TODOS LOS CAMPOS";
+                    document.getElementById( "error_para" ).innerHTML = error;
+                    return false;
+                }
+
+                else {
+                   form.submit();
+                }
+            })
+        
+        }
+        
+        </script>
      
 </body>
 </html>
